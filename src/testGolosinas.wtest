@@ -1,6 +1,75 @@
+import golosinas.*
 
-test "testX" {
-
-	assert.that(true)
-
+test "bombon test" {
+	assert.equals(5,bombon.precio())
+	assert.equals("frutilla",bombon.sabor())
+	assert.equals(false,bombon.contieneGluten())
+	assert.equals(15,bombon.pesoEnGramos())
+	bombon.darMordisco()
+	assert.equals(13,bombon.pesoEnGramos())
+}
+test "alfajor test" {
+	assert.equals(12,alfajor.precio())
+	assert.equals("chocolate",alfajor.sabor())
+	assert.equals(true,alfajor.contieneGluten())
+	assert.equals(300,alfajor.pesoEnGramos())
+	alfajor.darMordisco()
+	assert.equals(240,alfajor.pesoEnGramos())
+}
+test "caramelo test" {
+	assert.equals(1,caramelo.precio())
+	assert.equals("frutilla",caramelo.sabor())
+	assert.equals(false,caramelo.contieneGluten())
+	assert.equals(5,caramelo.pesoEnGramos())
+	caramelo.darMordisco()
+	assert.equals(4,caramelo.pesoEnGramos())
+}
+test "chupetin test" {
+	assert.equals(2,chupetin.precio())
+	assert.equals("naranja",chupetin.sabor())
+	assert.equals(false,chupetin.contieneGluten())
+	assert.equals(7,chupetin.pesoEnGramos())
+	chupetin.darMordisco()
+	assert.equals(6.3,chupetin.pesoEnGramos())
+}
+test "oblea test" {
+	assert.equals(5,oblea.precio())
+	assert.equals("vainilla",oblea.sabor())
+	assert.equals(true,oblea.contieneGluten())
+	assert.equals(250,oblea.pesoEnGramos())
+	oblea.darMordisco()
+	assert.equals(125,oblea.pesoEnGramos())
+}
+test "chocolatin test" {
+	chocolatin.precio(10)
+	assert.equals(5,chocolatin.precio())
+	assert.equals("chocolate",chocolatin.sabor())
+	assert.equals(true,chocolatin.contieneGluten())
+	assert.equals(10,chocolatin.pesoEnGramos())
+	chocolatin.darMordisco()
+	assert.equals(8,chocolatin.pesoEnGramos())
+}
+test "tutti-frutti con gluten test" {
+	pastillaTuttiFruitti.contieneGluten(true)
+	assert.equals(10,pastillaTuttiFruitti.precio())
+	assert.equals(true,pastillaTuttiFruitti.contieneGluten())
+	assert.equals(5,pastillaTuttiFruitti.pesoEnGramos())
+	pastillaTuttiFruitti.darMordisco()
+	assert.equals(4,pastillaTuttiFruitti.pesoEnGramos())
+}
+test "tutti-frutti sin gluten test" {
+	pastillaTuttiFruitti.contieneGluten(false)
+	assert.equals(7,pastillaTuttiFruitti.precio())
+	assert.equals(false,pastillaTuttiFruitti.contieneGluten())
+	assert.equals(5,pastillaTuttiFruitti.pesoEnGramos())
+	pastillaTuttiFruitti.darMordisco()
+	assert.equals(4,pastillaTuttiFruitti.pesoEnGramos())
+}
+test "golosina bañada de chocolatin test" {
+	golosinaBaniada.golosinaBase(chocolatin)
+	assert.equals(7,golosinaBaniada.precio())
+	assert.equals(false,golosinaBaniada.contieneGluten())
+	assert.equals(5,golosinaBaniada.pesoEnGramos())
+	golosinaBaniada.darMordisco()
+	assert.equals(4,golosinaBaniada.pesoEnGramos())
 }
