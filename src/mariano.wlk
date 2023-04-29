@@ -13,22 +13,20 @@ object mariano {
 		return bolsaDeGolosinas.size()
 	}
 	method tieneLaGolosina(unaGolosina){
-		return bolsaDeGolosinas.map({golosina=>golosina==unaGolosina})
+		return bolsaDeGolosinas.find({golosina=>golosina==unaGolosina})==unaGolosina
 	}
 	method probarGolosinas(){
 		bolsaDeGolosinas.forEach({golosina=>golosina.darMordisco()})
 	}
 	method hayGolosinaSinTACC(){
-		return bolsaDeGolosinas.map({golosina=>not(golosina.contieneGluten())})
+		return bolsaDeGolosinas.any({golosina=>not(golosina.contieneGluten())})
 	}
 	method preciosCuidados(){
-		return bolsaDeGolosinas.map({golosina=>golosina.precio()<=10})
+		return bolsaDeGolosinas.all({golosina=>golosina.precio()<=10})
 	} 
-	method golosinaDeSabor(unSabor){
-		return self.bolsaDeGolosinas().find({golosina=>golosina.sabor()==unSabor})
-	}
+	method golosinaDeSabor(unSabor) = bolsaDeGolosinas.find({golosina=>golosina.sabor()==unSabor})
 	method golosinasDeSabor(unSabor){
-		return self.bolsaDeGolosinas().filter({golosina=>golosina.sabor()==unSabor})
+		return self.bolsaDeGolosinas().filter({golosinas=>golosinas.sabor()==unSabor})
 	}
 	method sabores(){
 		return self.bolsaDeGolosinas().map({golosina=>golosina.sabor()}).asSet()
@@ -39,8 +37,8 @@ object mariano {
 	method pesoGolosinas(){
 		return self.bolsaDeGolosinas().map({golosina=>golosina.pesoEnGramos()}).sum()
 	}
-	method golosinasFaltantes(golosinasDeseadas){
-		return golosinasDeseadas.difference(self.bolsaDeGolosinas().asSet())
+	method golosinasFaltantes(losCandys){
+		return losCandys.difference(self.bolsaDeGolosinas().asSet())
 	}
 	method gustosFaltantes(gustosDeseados){
 		return gustosDeseados.difference(self.sabores().asSet())

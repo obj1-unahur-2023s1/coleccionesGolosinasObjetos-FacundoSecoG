@@ -108,61 +108,43 @@ object oblea {
 	}
 }
 
-object chocolatin {
-	var property precio 
-	const sabor = gustos.get(1)
-	var property pesoEnGramos 
-	const contieneGluten = true
+object cosa {
+	var pesoEnGramos
+	var precio
 	
-	method precio(gramos){
+	method contieneGluten() = true
+	method sabor() = gustos.get(1)
+	method asignarPeso(gramos) {
 		pesoEnGramos=gramos
-		return 0.5*gramos
+		precio=gramos*0.5
 	}
-	method sabor(){
-		return sabor
-	}
+	method precio()=precio
+	method pesoEnGramos()=pesoEnGramos
 	method darMordisco(){
 		pesoEnGramos-=2
-	}
-	method contieneGluten(){
-		return contieneGluten
 	}
 }
 
 object golosinaBaniada {
-	var property precio 
-	var property sabor 
-	var property golosinaBase 
-	var property pesoEnGramos 
-	var property contieneGluten 
+	var golosinaBase
+	var peso
+	var cantMordiscos = 1
 	
-	method contieneGluten(){
-		contieneGluten = self.golosinaBase().contieneGluten()
-		return contieneGluten
+	method baniar(unaGolosina) {
+		golosinaBase = unaGolosina
+		peso = golosinaBase.pesoEnGramos() + 4
+		cantMordiscos = 0
 	}
-	method pesoEnGramos(){
-		pesoEnGramos = self.golosinaBase().pesoEnGramos()
-		return pesoEnGramos+4
-	}
-	method precio(){
-		precio = self.golosinaBase().precio()
-		return precio+2
-	}
-	method sabor(){
-		sabor = self.golosinaBase().sabor()
-		return sabor
-	}
-	method darMordisco(){
-		var cantMordiscos 
-		if (cantMordiscos<=2){
-			cantMordiscos+=1
-			golosinaBase.darMordisco()
-			pesoEnGramos-=(golosinaBase.pesoEnGramos()+2)	
-		}else{
-			cantMordiscos+=1
-			golosinaBase.darMordisco()
-			pesoEnGramos-=(golosinaBase.pesoEnGramos())
-		}
+	
+	method precio() = golosinaBase.precio() + 2
+	method pesoEnGramos() = peso
+	method sabor() = golosinaBase.sabor()
+	method contieneGluten() = golosinaBase.contieneGluten()
+
+	method darMordisco() {
+		cantMordiscos ++
+		golosinaBase.darMordisco()
+		peso = golosinaBase.pesoEnGramos() + if(cantMordiscos == 1){2}else{0}
 	}
 }
 
@@ -170,10 +152,12 @@ object pastillaTuttiFruitti {
 	var property precio 
 	var property sabor = gustosTutti.get(0)
 	var property pesoEnGramos = 5
-	var property contieneGluten 
-	
+	var contieneGluten
+
+	method contieneGluten(valor) { contieneGluten=valor }
+	method contieneGluten() = contieneGluten
 	method precio(){
-		if (contieneGluten){
+		if (self.contieneGluten()){
 			precio = 10
 		}else{
 			precio = 7
