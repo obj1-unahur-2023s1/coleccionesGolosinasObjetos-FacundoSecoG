@@ -6,7 +6,6 @@ object bombon {
 	const sabor = gustos.get(0)
 	var property pesoEnGramos = 15
 	const contieneGluten = false
-	
 	method precio(){
 		return precio
 	}
@@ -108,20 +107,20 @@ object oblea {
 	}
 }
 
-object cosa {
-	var pesoEnGramos
-	var precio
+object chocolatin{
+	var peso=null
+	var pesoInicial=null
 	
-	method contieneGluten() = true
-	method sabor() = gustos.get(1)
-	method asignarPeso(gramos) {
-		pesoEnGramos=gramos
-		precio=gramos*0.5
+	method asignarPeso(pesoEnGramos){
+		pesoInicial=pesoEnGramos
+		peso=pesoInicial
 	}
-	method precio()=precio
-	method pesoEnGramos()=pesoEnGramos
+	method precio()=pesoInicial*0.5
+	method contieneGluten()=true
+	method sabor()=gustos.get(1)
+	method pesoEnGramos()=peso
 	method darMordisco(){
-		pesoEnGramos-=2
+		peso=0.max(peso-2)
 	}
 }
 
@@ -149,32 +148,13 @@ object golosinaBaniada {
 }
 
 object pastillaTuttiFruitti {
-	var property precio 
-	var property sabor = gustosTutti.get(0)
-	var property pesoEnGramos = 5
-	var contieneGluten
-
-	method contieneGluten(valor) { contieneGluten=valor }
-	method contieneGluten() = contieneGluten
-	method precio(){
-		if (self.contieneGluten()){
-			precio = 10
-		}else{
-			precio = 7
-		}
-		return precio
-	}
-	method sabor(){
-		return sabor
-	}
+	var mordisco=0
+	var property contieneGluten=false
+	
+	method pesoEnGramos()=5
+	method precio()= if(contieneGluten)7 else 10
+	method sabor()=gustosTutti.get(mordisco%gustosTutti.size())
 	method darMordisco(){
-		pesoEnGramos-=1
-		if (sabor==gustosTutti.last()){
-			sabor=gustosTutti.get(0)
-		}else if (sabor==gustosTutti.get(0)){
-			sabor=gustosTutti.get(1)
-		}else{
-			sabor=gustosTutti.get(2)
-		}
+		mordisco++
 	}
 }
